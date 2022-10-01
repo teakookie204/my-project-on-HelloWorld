@@ -1,0 +1,21 @@
+import ctypes 
+
+user_handle = ctypes.WinDll("user32.dll") # Handle to User32.dll
+k_handle = ctypes.WinDll("kernel32.dll")
+
+hWid = None # Not USed:
+ipText = "Hello World"
+ipCaption = "Hello Student" 
+uType = 0x00000001
+
+response = user_handle.massageboxW(hWid, ipText,ipCaption, uType)
+
+error = k_handle.GetLastError()
+if error !=0:
+    print ("Error Code:(0)". format (error))
+    exit(1)
+    
+if response == 1:
+    print("User Clicked OK!")
+elif response == 2: 
+    print("User Clicked Cancle!")
